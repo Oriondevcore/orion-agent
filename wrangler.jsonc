@@ -1,0 +1,39 @@
+{
+  "$schema": "./node_modules/wrangler/config-schema.json",
+  "name": "orion-agent",
+  "main": "src/index.ts",
+  "compatibility_date": "2026-07-03",
+  "compatibility_flags": ["nodejs_compat"],
+  "ai": {
+    "binding": "AI"
+  },
+  "assets": {
+    "binding": "ASSETS",
+    "directory": "client/dist",
+    "not_found_handling": "single-page-application"
+  },
+  "kv_namespaces": [
+    {
+      "binding": "ORION_CONFIG",
+      "id": "f73515afb8a04d678669d161314fd2c7"
+    }
+  ],
+  "durable_objects": {
+    "bindings": [
+      {
+        "class_name": "OrionAgent",
+        "name": "OrionAgent"
+      }
+    ]
+  },
+  "migrations": [
+    {
+      "new_sqlite_classes": ["OrionAgent"],
+      "tag": "v1"
+    }
+  ],
+  "vars": {
+    "CF_MODEL_ORION": "@cf/moonshotai/kimi-k2.6",
+    "CLOUDFLARE_ACCOUNT_ID": "fdd89cf30de14e1ddcfa5fbbf27581c1"
+  }
+}

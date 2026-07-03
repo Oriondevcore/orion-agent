@@ -33,7 +33,6 @@
     }
   ],
   "vars": {
-    "CF_MODEL_ORION": "@cf/moonshotai/kimi-k2.6",
-    "CLOUDFLARE_ACCOUNT_ID": "fdd89cf30de14e1ddcfa5fbbf27581c1"
+    "CF_MODEL_ORION": "@cf/google/gemma-4-26b-a4b-it"
   }
 }

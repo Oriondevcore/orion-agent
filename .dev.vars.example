@@ -1,0 +1,7 @@
+# Workers AI model override (optional)
+# CF_MODEL_ORION=@cf/google/gemma-4-26b-a4b-it
+
+# Auth password for dashboard (optional)
+# ORION_AUTH_TOKEN=your-password-here
+
+# Wrangler picks up account_id from login context

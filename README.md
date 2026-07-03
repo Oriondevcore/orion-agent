@@ -1,5 +1,7 @@
 # Orion Agent
 
+[![GitHub Sponsors](https://img.shields.io/badge/Sponsor-%23EA4AAA.svg?style=for-the-badge&logo=githubsponsors&logoColor=white)](https://github.com/sponsors/Oriondevcore)
+
 Cloudflare Workers AI agent with a Think-based reasoning engine, real-time WebSocket chat, voice interface, and an admin dashboard — all running on Cloudflare Workers + Durable Objects + KV.
 
 ## Architecture

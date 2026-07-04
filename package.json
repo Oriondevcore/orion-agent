@@ -7,7 +7,8 @@
     "dev": "wrangler dev",
     "deploy": "wrangler deploy",
     "typecheck": "tsc --noEmit",
-    "test": "vitest run"
+    "test": "vitest run",
+    "commitlint": "commitlint --config commitlint.config.cjs --from HEAD~1 --to HEAD || true"
   },
   "dependencies": {
     "agents": "^0.17.3",
@@ -18,10 +19,12 @@
     "zod": "^3.25.76"
   },
   "devDependencies": {
-    "wrangler": "^4.107.0",
+    "@cloudflare/vitest-pool-workers": "^0.7.8",
     "@cloudflare/workers-types": "^4.20260702.1",
+    "@commitlint/cli": "^21.2.0",
+    "@commitlint/config-conventional": "^21.2.0",
     "typescript": "^5.9.3",
     "vitest": "^3.2.6",
-    "@cloudflare/vitest-pool-workers": "^0.7.8"
+    "wrangler": "^4.107.0"
   }
 }

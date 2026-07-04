@@ -1,81 +1,70 @@
 # Orion Agent
 
-[![GitHub Sponsors](https://img.shields.io/badge/Sponsor-%23EA4AAA.svg?style=for-the-badge&logo=githubsponsors&logoColor=white)](https://github.com/sponsors/Oriondevcore)
+[![GitHub Sponsors](https://img.shields.io/badge/Sponsor-%23EA4AAA.svg?style=flat&logo=githubsponsors&logoColor=white)](https://github.com/sponsors/Oriondevcore)
+[![MIT License](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
+[![CI](https://github.com/Oriondevcore/orion-agent/actions/workflows/deploy.yml/badge.svg)](https://github.com/Oriondevcore/orion-agent/actions/workflows/deploy.yml)
+[![TypeScript](https://img.shields.io/badge/TypeScript-strict-blue)](https://www.typescriptlang.org/)
 
-Cloudflare Workers AI agent with a Think-based reasoning engine, real-time WebSocket chat, voice interface, and an admin dashboard — all running on Cloudflare Workers + Durable Objects + KV.
+Think-based AI agent on Cloudflare Workers with real-time WebSocket chat, voice interface, admin dashboard, and a modular reasoning engine.
+
+## What Makes Orion Agent Different
+
+Most AI agents are stateless — fire a prompt, get a reply, forget everything. Orion Agent uses a **Think-then-Act** reasoning loop inspired by cognitive architectures. Every user message triggers a structured deliberation cycle: context retrieval → reasoning → tool selection → action → observation. This gives the agent genuine situational awareness across sessions.
+
+The agent maintains persistent memory via Durable Objects, supports real-time collaboration through WebSocket state sync, and integrates with Cloudflare Workers AI for inference, Whisper for speech-to-text, and MeloTTS for voice output.
 
 ## Architecture
 
 ```
-                    ┌─────────────────────────┐
-                    │    Client (React SPA)    │
-                    │  apps/orion-agent/client │
-                    └────────┬───────┬─────────┘
-                             │  WS   │  REST
-                    ┌────────▼───────▼─────────┐
-                    │   Worker (index.ts)      │
-                    │  ┌───────────────────┐  │
-                    │  │   OrionAgent DO    │  │
-                    │  │  (Think + RPC)     │  │
-                    │  └───────────────────┘  │
-                    │         │               │
-                    │  ┌──────▼────────┐     │
-                    │  │   KV Store    │     │
-                    │  │(SOPs, Docs,   │     │
-                    │  │ models, KPIs) │     │
-                    │  └───────────────┘     │
-                    │         │               │
-                    │  ┌──────▼────────┐     │
-                    │  │  Workers AI   │     │
-                    │  │ (inference)   │     │
-                    │  └───────────────┘     │
-                    └─────────────────────────┘
+Client (React SPA) ──WebSocket──► Worker ──► OrionAgent DO ──► KV Store
+                        │                                    │
+                        └──────── REST ───────────────────────┘
+                                              │
+                                        Workers AI
+                                    (inference + voice)
 ```
+
+- **OrionAgent DO** — Durable Object that owns conversation state, Think loop, and RPC interface
+- **KV Store** — SOPs, documentation, model catalog, KPI counters
+- **React Dashboard** — WebSocket-connected admin UI with model browser, memory inspector, and voice input
 
 ## Quick Start
 
 ```bash
-# Install dependencies
-cd apps/orion-agent && bun install
+cd apps/orion-agent
+bun install
 cd client && bun install && cd ..
-
-# Build dashboard
 (cd client && bun run build)
-
-# Run locally
 bun run dev
-# → Worker at http://localhost:8787
-# → Dashboard at http://localhost:5173 (proxies to Worker)
 ```
+
+Worker at `localhost:8787`, dashboard at `localhost:5173`.
 
 ## Deploy
 
 ```bash
-# One-time: create KV namespace
 npx wrangler kv namespace create ORION_CONFIG
-
-# Deploy Worker + dashboard
 npx wrangler deploy
 ```
 
-## Environment
-
-| Variable | Required | Description |
-|----------|----------|-------------|
-| `CF_MODEL_ORION` | No | Model override (default: `@cf/moonshotai/kimi-k2.6`) |
-| `ORION_AUTH_TOKEN` | No | Auth password (dashboard password gate) |
-
 ## Features
 
-- Think-based reasoning agent with tool calling
+- Think-based reasoning engine with tool-calling loop
 - WebSocket real-time chat with auto-reconnect
-- Voice input (browser native + Workers AI Whisper/MeloTTS)
-- Model catalog browser (Cloudflare Workers AI models)
-- SOPs/Docs CRUD management
-- KPI tracking (conversations, cost, errors)
-- Mintaka RPC via `@callable()` (mintakaChat, getContext, injectMemory)
+- Voice input + output (Whisper + MeloTTS)
+- Model catalog browser with live inference switching
+- SOPs / Docs CRUD management (KV-backed)
+- KPI tracking (conversations, cost, error rates)
+- Mintaka RPC `@callable()` — `mintakaChat`, `getContext`, `injectMemory`
 - Auth gate with Bearer token
 - Mobile responsive dashboard
+
+## Environment
+
+| Variable | Required | Default | Description |
+|----------|----------|---------|-------------|
+| `CF_MODEL_ORION` | No | `@cf/moonshotai/kimi-k2.6` | Model override |
+| `ORION_AUTH_TOKEN` | No | — | Dashboard password |
 
 ## License
 

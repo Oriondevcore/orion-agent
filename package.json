@@ -24,7 +24,7 @@
     "@commitlint/cli": "^21.2.0",
     "@commitlint/config-conventional": "^21.2.0",
     "typescript": "^5.9.3",
-    "vitest": "^3.2.6",
+    "vitest": "^4.1.9",
     "wrangler": "^4.107.0"
   }
 }

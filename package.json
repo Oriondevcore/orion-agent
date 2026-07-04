@@ -23,7 +23,7 @@
     "@cloudflare/workers-types": "^4.20260702.1",
     "@commitlint/cli": "^21.2.0",
     "@commitlint/config-conventional": "^21.2.0",
-    "typescript": "^5.9.3",
+    "typescript": "^6.0.3",
     "vitest": "^3.2.6",
     "wrangler": "^4.107.0"
   }

@@ -16,7 +16,7 @@
     "@cloudflare/ai-chat": "^0.9.3",
     "ai": "^7.0.14",
     "workers-ai-provider": "^3.3.1",
-    "zod": "^3.25.76"
+    "zod": "^4.4.3"
   },
   "devDependencies": {
     "@cloudflare/vitest-pool-workers": "^0.7.8",

@@ -12,7 +12,7 @@
   },
   "dependencies": {
     "agents": "^0.17.3",
-    "@cloudflare/think": "^0.12.1",
+    "@cloudflare/think": "^0.13.0",
     "@cloudflare/ai-chat": "^0.9.3",
     "ai": "^7.0.14",
     "workers-ai-provider": "^3.3.1",

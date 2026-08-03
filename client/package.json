@@ -13,7 +13,7 @@
     "react-dom": "^19.2.7",
     "react-router-dom": "^7.18.1",
     "@cloudflare/ai-chat": "^0.9.3",
-    "agents": "^0.17.3"
+    "agents": "^0.20.1"
   },
   "devDependencies": {
     "@types/react": "^19.2.17",
